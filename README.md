@@ -1,25 +1,26 @@
 # Laras — Fashion for Every Day
 
-Laras is a MERN fashion storefront for browsing products, viewing product details, managing a cart, placing COD orders, and handling products and order statuses in an admin dashboard.
+Laras is a small fashion store built as my MERN capstone project. I wanted the shopping flow to feel simple: browse a few collections, check product details, add something to the cart, and place an order. There is also an admin area for managing the catalog and keeping an eye on orders.
 
-## Features
+## What you can do
 
-- Responsive landing page, catalog, product details, search, category/gender filters, and sorting
-- Customer and admin registration/login with JWT-backed requests
-- Cart, delivery form, COD order placement, order history, and cancellation
-- Admin dashboard statistics, product create/edit/delete, and order status updates
-- Centralized Axios API module with Bearer-token handling
-- Clearly labelled browser-local demo fallback when the API cannot be reached
+- Browse products, search the catalog, and filter by category or gender
+- View product details, choose a size, and add items to the cart
+- Create a customer or admin account and sign in
+- Place a COD order and check its status from the profile page
+- Add or edit products, update order statuses, and view store counts as an admin
 
-## Technology
+If the API is unavailable, Laras can switch to a clearly marked demo mode. Demo data stays in that browser and is not saved to MongoDB.
 
-React, Vite, React Router, Axios, Node.js, Express, MongoDB, and Mongoose.
+## Built with
 
-## Run locally
+React, Vite, React Router, and Axios on the frontend; Node.js, Express, Mongoose, and MongoDB on the backend.
 
-Start each side in a separate PowerShell terminal from the repository root.
+## Run it on your computer
 
-### Backend
+You will need Node.js and a MongoDB database. Open two PowerShell terminals from the project folder.
+
+### 1. Start the API
 
 ```powershell
 cd server
@@ -27,9 +28,9 @@ npm install
 npm run dev
 ```
 
-Configure `MONGO_URI`, `JWT_SECRET`, and `PORT=8000` in your private server environment. Keep environment values out of Git and screenshots.
+Before starting it, configure `MONGO_URI`, `JWT_SECRET`, and `PORT=8000` in your private server environment. Keep those values out of GitHub and screenshots.
 
-### Frontend
+### 2. Start the website
 
 ```powershell
 cd client
@@ -37,17 +38,17 @@ npm install
 npm run dev
 ```
 
-Open the Vite URL printed in the terminal, normally `http://localhost:5173`. The client API defaults to `http://localhost:8000`.
+Open the local address printed by Vite, usually `http://localhost:5173`. The frontend looks for the API at `http://localhost:8000` by default.
 
-## Project layout
+## Where things live
 
-- `client/src/pages/` storefront, account, and admin screens
-- `client/src/components/` shared layout, auth context, and route guard
-- `client/src/api.js` API methods and browser-demo fallback routing
-- `client/src/demoStore.js` browser-local demo accounts, catalog, cart, and orders
-- `server/index.js` Express endpoints
-- `server/models/Schema.js` Mongoose schemas
+- `client/src/pages/` contains the store, account, and admin screens.
+- `client/src/components/` contains shared layout and authentication pieces.
+- `client/src/api.js` keeps the frontend's API requests in one place.
+- `client/src/demoStore.js` holds the browser-only demo data and actions.
+- `server/index.js` contains the Express API routes.
+- `server/models/Schema.js` defines the MongoDB models.
 
-## Demo limits
+## A note about checkout
 
-Checkout records the COD/payment-method choice and creates an order; it does not process a real payment. Browser fallback data stays in the current browser. The supplied server does not implement persistent banner or user-list endpoints. Admin role creation and order-cancellation ownership checks need server-side hardening before deployment.
+Checkout saves the delivery details, order items, and chosen payment method. COD orders can be placed and viewed in the order history, but Laras does not process online payments or connect to a payment gateway yet. Banner editing is browser-local, and the supplied API does not include a user-list endpoint. Before a real launch, admin account creation and order-cancellation permissions should also be tightened on the server.
